@@ -1,13 +1,14 @@
-import mongoose, { Schema } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
-interface IUser {
+export interface IUser {
 	fullName: string
 	email: string
 	passwordHash: string
 	avatarUrl?: string
+	favorites?: Array<Types.ObjectId>
 }
 
-const UserSchema: Schema = new mongoose.Schema(
+const UserSchema: Schema = new Schema<IUser>(
 	{
 		fullName: {
 			type: String,
@@ -23,10 +24,15 @@ const UserSchema: Schema = new mongoose.Schema(
 			required: true,
 		},
 		avatarUrl: String,
+		favorites: {
+			type: Array<Schema.Types.ObjectId>,
+			ref: 'Product',
+			default: [],
+		},
 	},
 	{
 		timestamps: true,
 	}
 )
 
-export default mongoose.model('User', UserSchema)<IUser>
+export default model('User', UserSchema)<IUser>

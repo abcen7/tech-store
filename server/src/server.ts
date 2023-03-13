@@ -1,11 +1,15 @@
-import express, { Application, Request, Response } from 'express'
+import express, { Application } from 'express'
 import mongoose from 'mongoose'
+
 import { authValidation, registerValidation } from './validations/auth'
 import checkAuth from './utils/checkAuth'
+import { productCreateValidation } from './validations/product'
+import { tagCreateValidation } from './validations/tag'
 
 import * as UserController from './controllers/UserController'
 import * as ProductController from './controllers/ProductController'
-import { productCreateValidation } from './validations/product'
+import * as TagController from './controllers/TagController'
+import * as FavoritesController from './controllers/FavoritesController'
 
 // Getting .env params
 require('dotenv').config()
@@ -39,6 +43,17 @@ app.post(
 )
 app.delete('/products/:id', checkAuth, ProductController.remove)
 app.patch('/products/:id', checkAuth, ProductController.update)
+
+app.post('/favorites/:userId/:productId', checkAuth, FavoritesController.create)
+app.delete(
+	'/favorites/:userId/:productId',
+	checkAuth,
+	FavoritesController.remove
+)
+
+app.get('/tags', checkAuth, TagController.getAll)
+app.post('/tags', checkAuth, tagCreateValidation, TagController.create)
+app.delete('/tags/:id', checkAuth, TagController.remove)
 
 app.listen(port, () => {
 	console.log('Server running on port >> ' + port)

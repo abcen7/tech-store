@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 
 export const getAll = async (req: Request, res: Response) => {
 	try {
-		const products = await ProductModel.find()
+		const products = await ProductModel.find().populate('tags')
 		res.status(200).json(products)
 	} catch (err) {
 		console.log(err)
@@ -14,7 +14,7 @@ export const getAll = async (req: Request, res: Response) => {
 export const getOne = async (req: Request, res: Response) => {
 	try {
 		const productId = req.params.id
-		const product = await ProductModel.findById(productId)
+		const product = await ProductModel.findById(productId).populate('tags')
 		res.status(200).json(product)
 	} catch (err) {
 		console.log(err)
@@ -25,7 +25,7 @@ export const getOne = async (req: Request, res: Response) => {
 export const remove = async (req: Request, res: Response) => {
 	try {
 		const productId = req.params.id
-		ProductModel.findByIdAndRemove(productId).exec()
+		await ProductModel.findByIdAndRemove(productId)
 		res.status(200).json({
 			success: true,
 		})
@@ -60,7 +60,7 @@ export const create = async (req: Request, res: Response) => {
 export const update = async (req: Request, res: Response) => {
 	try {
 		const productId = req.params.id
-		const updatedProduct = ProductModel.findByIdAndUpdate(productId, {
+		await ProductModel.findByIdAndUpdate(productId, {
 			title: req.body.title,
 			amount: req.body.amount,
 			colors: req.body.colors,
@@ -69,7 +69,7 @@ export const update = async (req: Request, res: Response) => {
 			description: req.body.description,
 			tags: req.body.tags,
 			imagesUrl: req.body.imagesUrl,
-		}).exec()
+		})
 		res.status(200).json({
 			success: true,
 		})
