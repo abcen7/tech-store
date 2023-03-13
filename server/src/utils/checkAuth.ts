@@ -9,7 +9,6 @@ export default (
 	const token = (req.headers.authorization || '')
 		.replace(/Bearer\s?/, '')
 		.trim()
-	console.log(token)
 	try {
 		if (token) {
 			const decoded = jwt.verify(

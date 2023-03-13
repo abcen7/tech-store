@@ -38,7 +38,7 @@ app.post(
 	ProductController.create
 )
 app.delete('/products/:id', checkAuth, ProductController.remove)
-// app.patch('/products', checkAuth, ProductController.update)
+app.patch('/products/:id', checkAuth, ProductController.update)
 
 app.listen(port, () => {
 	console.log('Server running on port >> ' + port)
