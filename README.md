@@ -5,10 +5,5 @@ Author: Nielsen J. <abcen7>
 
 TODO:
 
-- Backend
-
-1. Roles authorization
-   ...
-
 - Frontend
   Design + React application with RTK, need realization with Vite !!!
