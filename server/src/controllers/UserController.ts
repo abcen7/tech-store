@@ -30,6 +30,7 @@ export const login = async (req: Request, res: Response) => {
 		const token = jwt.sign(
 			{
 				_id: user._id,
+				role: user.role,
 			},
 			process.env.JWT_SECRET_KEY as string,
 			{
@@ -73,6 +74,7 @@ export const register = async (req: Request, res: Response) => {
 		const token = jwt.sign(
 			{
 				_id: user._id,
+				role: user.role,
 			},
 			process.env.JWT_SECRET_KEY as string,
 			{
@@ -112,6 +114,7 @@ export const authMe = async (
 		const token = jwt.sign(
 			{
 				_id: user?._id,
+				role: user?.role,
 			},
 			process.env.JWT_SECRET_KEY as string,
 			{
