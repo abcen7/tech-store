@@ -1,10 +1,13 @@
 {
-	"name": "apple-store",
+	"name": "tech-store-api",
 	"version": "1.0.0",
 	"description": "Store based on MERN technology",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "npx tsc",
+		"start": "node dist/index.js",
+		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
 	},
 	"keywords": [],
 	"author": "Nielsen J. <abcen7>",
@@ -12,7 +15,8 @@
 	"devDependencies": {
 		"@types/bson": "^4.2.0",
 		"@types/express": "^4.17.17",
-		"nodemon": "^2.0.21",
+		"concurrently": "^8.2.0",
+		"nodemon": "^2.0.22",
 		"ts-node": "^10.9.1",
 		"typescript": "^4.9.5"
 	},

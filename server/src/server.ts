@@ -18,7 +18,9 @@ import * as TagController from './controllers/TagController'
 import * as FavoritesController from './controllers/FavoritesController'
 
 // Getting .env params
-require('dotenv').config({ path: '../.env' })
+require('dotenv').config()
+
+console.log(process.env.MONGO_DB_LINK)
 
 // Connecting to mongodb
 mongoose
